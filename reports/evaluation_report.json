@@ -1,0 +1,107 @@
+{
+  "dataset_statistics": {
+    "total_records": 14504,
+    "test_records": 2915,
+    "num_features_raw": 46,
+    "num_features_transformed": 52
+  },
+  "target_distribution": {
+    "overall_match_rate": 0.19560121345835632,
+    "test_match_rate": 0.20480274442538593
+  },
+  "preprocessing_strategy": {
+    "numerical_imputation": "Median Imputer",
+    "scaling": "StandardScaler",
+    "categorical_encoding": "OneHotEncoder(handle_unknown='ignore')",
+    "leakage_prevention": "Strict exclusion of male_decision, female_decision, match, and participant IDs"
+  },
+  "feature_engineering": [
+    "Age Compatibility (age_gap)",
+    "Mutual Ratings (attractiveness, sincerity, intelligence, fun, ambition)",
+    "Rating Gaps (perception asymmetry)",
+    "Preference Alignment (normalized pref vs ratings)",
+    "Lifestyle Compatibility (going out frequency gap)",
+    "Overall Ratings & Rating Gaps"
+  ],
+  "train_test_methodology": "GroupShuffleSplit and 5-Fold GroupKFold on participant ID (male_id) to prevent participant leakage",
+  "best_model": "Logistic Regression",
+  "selected_threshold": 0.3,
+  "classification_metrics": {
+    "accuracy": 0.7623,
+    "precision": 0.4066,
+    "recall": 0.3501,
+    "f1_score": 0.3762,
+    "roc_auc": 0.7033,
+    "pr_auc": 0.4095,
+    "log_loss": 0.4608,
+    "brier_score": 0.147
+  },
+  "confusion_matrix": {
+    "true_positive": 209,
+    "true_negative": 2013,
+    "false_positive": 305,
+    "false_negative": 388,
+    "interpretation": {
+      "TP": "Model correctly predicted mutual match",
+      "TN": "Model correctly predicted no match",
+      "FP": "Model predicted match, but participants did not mutually match (False Hope)",
+      "FN": "Model predicted no match, but participants actually matched (Missed Opportunity)"
+    }
+  },
+  "top_10_features": [
+    {
+      "feature": "shared_interests",
+      "importance": 0.3639059419741731,
+      "rank": 1
+    },
+    {
+      "feature": "male_intelligence_alignment",
+      "importance": 0.34541185692814685,
+      "rank": 2
+    },
+    {
+      "feature": "male_attractiveness_alignment",
+      "importance": 0.28710324841897455,
+      "rank": 3
+    },
+    {
+      "feature": "intel_of_female",
+      "importance": 0.25903536688003553,
+      "rank": 4
+    },
+    {
+      "feature": "mutual_attractiveness",
+      "importance": 0.2510490943658898,
+      "rank": 5
+    },
+    {
+      "feature": "attr_of_female",
+      "importance": 0.2368524956809733,
+      "rank": 6
+    },
+    {
+      "feature": "mutual_intelligence",
+      "importance": 0.23609599789352623,
+      "rank": 7
+    },
+    {
+      "feature": "overall_female_rating",
+      "importance": 0.22665668140627063,
+      "rank": 8
+    },
+    {
+      "feature": "female_attractiveness_alignment",
+      "importance": 0.17557338837154726,
+      "rank": 9
+    },
+    {
+      "feature": "female_intelligence_alignment",
+      "importance": 0.16352496168167518,
+      "rank": 10
+    }
+  ],
+  "known_limitations": [
+    "Scenario A Post-Date Prediction: Uses post-interaction ratings given after dates.",
+    "Cannot predict pre-date mutual matches prior to participants meeting."
+  ]
+}
