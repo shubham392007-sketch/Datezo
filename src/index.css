@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-base: #FFFBF8;
+  --accent-coral: #F28B94;
+  --accent-coral-dark: #E96F7A;
+
+  --pastel-blue: #CDEFFB;
+  --pastel-yellow: #FBECAF;
+  --pastel-green: #D7F3D3;
+  --pastel-lavender: #E7D9F5;
+  --pastel-pink: #FFD5D8;
+
+  --ink-black: #1A1A1A;
+  --soft-black: #252525;
+  --body-gray: #686868;
+
+  --card-white: #FFFFFF;
+  --border-black: #1A1A1A;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--ink-black);
+  font-family: 'Poppins', 'Nunito', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Sticker Card Styling */
+.sticker-card {
+  position: relative;
+  background-color: #FFFFFF;
+  border: 1px solid #1A1A1A;
+  box-shadow: 6px 6px 0px #1A1A1A;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sticker-card-lg {
+  position: relative;
+  background-color: #FFFFFF;
+  border: 1px solid #1A1A1A;
+  box-shadow: 8px 8px 0px #1A1A1A;
+}
+
+.sticker-card-sm {
+  position: relative;
+  background-color: #FFFFFF;
+  border: 1px solid #1A1A1A;
+  box-shadow: 4px 4px 0px #1A1A1A;
+}
+
+/* Primary Button Styling */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--accent-coral);
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 0.75rem 1.75rem;
+  border-radius: 9999px;
+  border: 1px solid #1A1A1A;
+  box-shadow: 4px 4px 0px #1A1A1A;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-coral-dark);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #1A1A1A;
+}
+
+.btn-primary:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #1A1A1A;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFFFFF;
+  color: var(--ink-black);
+  font-weight: 600;
+  padding: 0.75rem 1.75rem;
+  border-radius: 9999px;
+  border: 1px solid #1A1A1A;
+  box-shadow: 4px 4px 0px #1A1A1A;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background-color: #FBECAF;
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #1A1A1A;
+}
+
+.btn-secondary:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #1A1A1A;
+}
+
+/* Custom Styled Range Sliders */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 10px;
+  background: #E5E7EB;
+  border: 1px solid #1A1A1A;
+  border-radius: 9999px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent-coral);
+  border: 2px solid #1A1A1A;
+  cursor: pointer;
+  box-shadow: 2px 2px 0px #1A1A1A;
+  transition: transform 0.1s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  background: var(--accent-coral-dark);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent-coral);
+  border: 2px solid #1A1A1A;
+  cursor: pointer;
+  box-shadow: 2px 2px 0px #1A1A1A;
+  transition: transform 0.1s ease;
+}
+
+/* Focus Outline Style */
+input:focus, select:focus, textarea:focus {
+  outline: 3px solid rgba(242, 139, 148, 0.4) !important;
+  outline-offset: 1px;
+}
