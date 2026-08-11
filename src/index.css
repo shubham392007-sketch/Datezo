@@ -15,7 +15,7 @@
 
   --ink-black: #1A1A1A;
   --soft-black: #252525;
-  --body-gray: #686868;
+  --body-gray: #333333;
 
   --card-white: #FFFFFF;
   --border-black: #1A1A1A;
@@ -149,4 +149,109 @@ input[type="range"]::-moz-range-thumb {
 input:focus, select:focus, textarea:focus {
   outline: 3px solid rgba(242, 139, 148, 0.4) !important;
   outline-offset: 1px;
+}
+
+/* Article Typography Styling - High Contrast Black Text */
+.article-body-content {
+  color: #1A1A1A !important;
+}
+
+.article-body-content h1 {
+  font-size: 1.875rem;
+  font-weight: 900;
+  color: #1A1A1A !important;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.25;
+}
+
+.article-body-content h2 {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #1A1A1A !important;
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 2px solid rgba(26, 26, 26, 0.1);
+  padding-bottom: 0.375rem;
+}
+
+.article-body-content h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #1A1A1A !important;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.article-body-content p {
+  color: #2D2D2D !important;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.75;
+  margin-bottom: 1.25rem;
+}
+
+.article-body-content ul, .article-body-content ol {
+  margin-top: 0.5rem;
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+  color: #1A1A1A !important;
+}
+
+.article-body-content ul {
+  list-style-type: disc;
+}
+
+.article-body-content ol {
+  list-style-type: decimal;
+}
+
+.article-body-content li {
+  color: #1A1A1A !important;
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.article-body-content strong, .article-body-content b {
+  color: #1A1A1A !important;
+  font-weight: 800;
+}
+
+.article-body-content code {
+  background-color: #FBECAF !important;
+  color: #1A1A1A !important;
+  border: 1px solid #1A1A1A;
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.375rem;
+  font-family: monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.article-body-content pre {
+  background-color: #FBECAF !important;
+  color: #1A1A1A !important;
+  border: 2px solid #1A1A1A;
+  padding: 1rem;
+  border-radius: 1rem;
+  overflow-x: auto;
+  margin-top: 1rem;
+  margin-bottom: 1.25rem;
+  font-family: monospace;
+  font-size: 0.85rem;
+  box-shadow: 4px 4px 0px #1A1A1A;
+}
+
+.article-body-content blockquote {
+  background-color: rgba(205, 239, 251, 0.4) !important;
+  border-left: 4px solid #F28B94;
+  color: #1A1A1A !important;
+  padding: 1rem 1.25rem;
+  border-radius: 0 1rem 1rem 0;
+  margin-top: 1rem;
+  margin-bottom: 1.25rem;
+  font-style: italic;
+  font-weight: 500;
 }

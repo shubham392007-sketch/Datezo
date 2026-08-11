@@ -64,7 +64,7 @@ export function ArticleReaderModal({ article, onClose }) {
 
           {/* Article Full Body Text */}
           <div
-            className="prose prose-sm sm:prose-base max-w-none text-ink font-normal leading-relaxed space-y-4"
+            className="article-body-content space-y-4"
             dangerouslySetInnerHTML={{ __html: article.content }}
           />
 
