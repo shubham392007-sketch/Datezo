@@ -6,67 +6,65 @@ export function HowItWorks() {
     {
       number: "01",
       title: "Enter Pair Details",
-      desc: "Provide the participant ages, shared interests, lifestyle and rating signals.",
+      desc: "Provide participant ages, shared interests, lifestyle and rating signals.",
       color: "bg-pastel-blue"
     },
     {
       number: "02",
       title: "Engineer Compatibility",
-      desc: "Datezo transforms the raw inputs into mutual ratings, gaps and preference-alignment features.",
+      desc: "Transforms raw inputs into mutual ratings, gaps and preference features.",
       color: "bg-pastel-green"
     },
     {
       number: "03",
       title: "Run the Model",
-      desc: "The trained classifier produces a calibrated match probability and threshold-based decision.",
+      desc: "Classifier produces a calibrated match probability & threshold decision.",
       color: "bg-pastel-pink"
     },
     {
       number: "04",
       title: "View Your Report",
-      desc: "See MATCH or NO MATCH, probability, Compatibility Index and the factors behind the result.",
+      desc: "See MATCH or NO MATCH, probability, Index and feature breakdown.",
       color: "bg-pastel-lavender"
     }
   ];
 
   return (
-    <section id="how-it-works" className="py-16 px-4 md:px-8 bg-pastel-yellow border-b border-black">
-      <div className="max-w-7xl mx-auto space-y-12">
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto space-y-3">
-          <h2 className="text-3xl sm:text-4xl font-black text-ink">
-            How <span className="text-coral">Datezo</span> Works
-          </h2>
-          <p className="text-base text-ink/80 font-medium">
-            Four steps from pair details to an explainable match prediction.
-          </p>
+    <div id="how-it-works" className="bg-pastel-yellow border-2 border-black rounded-3xl p-6 sm:p-8 shadow-sticker-lg h-full flex flex-col justify-between space-y-6">
+      {/* Header */}
+      <div className="space-y-1">
+        <h2 className="text-2xl sm:text-3xl font-black text-ink">
+          How <span className="text-coral">Datezo</span> Works
+        </h2>
+        <p className="text-xs text-ink/80 font-medium">
+          Four steps from pair details to an explainable match prediction report.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 items-center flex-1">
+        {/* 2x2 Step Cards Left (7 Cols) */}
+        <div className="xl:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {steps.map((step) => (
+            <div
+              key={step.number}
+              className="bg-white border border-black rounded-2xl p-4 shadow-sticker-sm space-y-2 transition-transform hover:-translate-y-1"
+            >
+              <div className={`w-8 h-8 ${step.color} border border-black rounded-lg flex items-center justify-center font-black text-ink text-xs shadow-sticker-sm`}>
+                {step.number}
+              </div>
+              <h3 className="text-sm font-black text-ink">{step.title}</h3>
+              <p className="text-[11px] text-body font-medium leading-normal">
+                {step.desc}
+              </p>
+            </div>
+          ))}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* 2x2 Numbered Cards Left (7 Cols) */}
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {steps.map((step) => (
-              <div
-                key={step.number}
-                className="bg-white border border-black rounded-2xl p-6 shadow-sticker relative space-y-3 transition-transform hover:-translate-y-1"
-              >
-                <div className={`w-10 h-10 ${step.color} border border-black rounded-xl flex items-center justify-center font-black text-ink text-base shadow-sticker-sm`}>
-                  {step.number}
-                </div>
-                <h3 className="text-lg font-black text-ink">{step.title}</h3>
-                <p className="text-xs text-body font-medium leading-relaxed">
-                  {step.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {/* Phone Mockup Right (5 Cols) */}
-          <div className="lg:col-span-5 flex justify-center">
-            <PhoneMockupIllustration />
-          </div>
+        {/* Phone Mockup Right (5 Cols) */}
+        <div className="xl:col-span-5 flex justify-center scale-90 sm:scale-100 origin-center">
+          <PhoneMockupIllustration />
         </div>
       </div>
-    </section>
+    </div>
   );
 }

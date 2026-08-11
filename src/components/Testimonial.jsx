@@ -39,79 +39,89 @@ export function Testimonial() {
   const active = TESTIMONIALS[currentIndex];
 
   return (
-    <section className="py-16 px-4 md:px-8 border-b border-black bg-[#FFFBF8]">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        {/* Title & Description Left (4 Cols) */}
-        <div className="lg:col-span-4 space-y-4 text-center lg:text-left">
-          <div className="inline-flex items-center gap-1.5 text-xs font-bold text-coral uppercase tracking-widest">
-            <Sparkles className="w-4 h-4 fill-current" />
-            EARLY FEEDBACK
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-black text-ink">
-            What Daters <span className="text-coral">Say ✦</span>
-          </h2>
-          <p className="text-sm text-body leading-relaxed">
-            Real reactions from early speed-dating participants testing our explainable match prediction engine.
-          </p>
+    <div className="bg-white border-2 border-black rounded-3xl p-6 sm:p-8 shadow-sticker-lg h-full flex flex-col justify-between relative overflow-hidden">
+      {/* Top Header */}
+      <div className="space-y-4">
+        <h2 className="text-2xl sm:text-3xl font-black text-ink">
+          What Daters <span className="text-coral">Say ✦</span>
+        </h2>
 
-          {/* Carousel Buttons */}
-          <div className="flex items-center justify-center lg:justify-start space-x-3 pt-2">
-            <button
-              onClick={prevTestimonial}
-              className="w-10 h-10 rounded-full border border-black bg-white shadow-sticker-sm flex items-center justify-center text-ink hover:bg-pastel-yellow transition-colors"
-              aria-label="Previous Testimonial"
-            >
-              <ArrowLeft className="w-4 h-4" />
-            </button>
-
-            <div className="flex space-x-1.5">
-              {TESTIMONIALS.map((_, idx) => (
-                <div
-                  key={idx}
-                  className={`w-2.5 h-2.5 rounded-full border border-black transition-colors ${
-                    idx === currentIndex ? 'bg-coral' : 'bg-white'
-                  }`}
-                />
-              ))}
-            </div>
-
-            <button
-              onClick={nextTestimonial}
-              className="w-10 h-10 rounded-full border border-black bg-white shadow-sticker-sm flex items-center justify-center text-ink hover:bg-pastel-yellow transition-colors"
-              aria-label="Next Testimonial"
-            >
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
+        {/* Oversized Double Quote Mark */}
+        <div className="text- coral text-5xl font-black font-serif leading-none select-none text-coral">
+          “
         </div>
 
-        {/* Big Editorial Quote Card Right (8 Cols) */}
-        <div className="lg:col-span-8">
-          <div className="bg-white border border-black rounded-3xl p-8 sm:p-12 shadow-sticker-lg relative overflow-hidden">
-            {/* Oversized Background Quote Mark */}
-            <Quote className="absolute -top-4 -right-4 w-32 h-32 text-pastel-pink/60 pointer-events-none" />
+        {/* Testimonial Quote */}
+        <p className="text-lg sm:text-xl font-bold text-ink leading-snug">
+          "{active.quote}"
+        </p>
 
-            <div className="relative z-10 space-y-6">
-              <p className="text-xl sm:text-2xl font-bold text-ink leading-snug">
-                "{active.quote}"
-              </p>
-
-              <div className="flex items-center gap-4 border-t border-black/10 pt-4">
-                <div className={`w-12 h-12 rounded-full border border-black flex items-center justify-center font-extrabold text-ink ${active.avatarBg}`}>
-                  {active.initials}
-                </div>
-                <div>
-                  <div className="text-base font-extrabold text-ink">{active.author}</div>
-                  <div className="text-xs font-medium text-body">{active.role}</div>
-                </div>
-                <div className="ml-auto bg-pastel-yellow text-ink text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-full border border-black">
-                  PROTOTYPE FEEDBACK
-                </div>
-              </div>
-            </div>
+        {/* Author Info */}
+        <div className="flex items-center gap-3 pt-2">
+          <div className={`w-10 h-10 rounded-full border border-black flex items-center justify-center font-black text-xs text-ink ${active.avatarBg}`}>
+            {active.initials}
+          </div>
+          <div>
+            <div className="text-sm font-black text-ink">{active.author}</div>
+            <div className="text-[10px] font-bold text-body uppercase tracking-wider">{active.role}</div>
           </div>
         </div>
       </div>
-    </section>
+
+      {/* Bottom Area: Carousel Controls Left & Vector Couple Graphic Right */}
+      <div className="flex items-end justify-between pt-8 mt-auto border-t border-black/10">
+        {/* Carousel Buttons Left */}
+        <div className="flex items-center space-x-2">
+          <button
+            onClick={prevTestimonial}
+            className="w-9 h-9 rounded-full border border-black bg-white shadow-sticker-sm flex items-center justify-center text-ink hover:bg-pastel-yellow transition-colors"
+            aria-label="Previous Testimonial"
+          >
+            <ArrowLeft className="w-4 h-4" />
+          </button>
+
+          <div className="flex space-x-1.5 px-1">
+            {TESTIMONIALS.map((_, idx) => (
+              <div
+                key={idx}
+                className={`w-2.5 h-2.5 rounded-full border border-black transition-colors ${
+                  idx === currentIndex ? 'bg-coral' : 'bg-white'
+                }`}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={nextTestimonial}
+            className="w-9 h-9 rounded-full border border-black bg-white shadow-sticker-sm flex items-center justify-center text-ink hover:bg-pastel-yellow transition-colors"
+            aria-label="Next Testimonial"
+          >
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
+
+        {/* Vector Couple Illustration Right */}
+        <div className="w-32 sm:w-40 h-auto shrink-0 select-none pointer-events-none -mb-4 -mr-2">
+          <svg viewBox="0 0 160 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+            {/* Man standing */}
+            <path d="M40 130 V70 C40 60 55 50 65 50 C75 50 90 60 90 70 V130" fill="#FBECAF" stroke="#1A1A1A" strokeWidth="2.5" />
+            <circle cx="65" cy="35" r="16" fill="#FCD5CE" stroke="#1A1A1A" strokeWidth="2.5" />
+            <path d="M50 30 C50 15 78 15 80 30 C72 20 58 20 50 30 Z" fill="#1A1A1A" />
+            <circle cx="60" cy="34" r="2" fill="#1A1A1A" />
+            <path d="M58 40 Q65 44 70 40" stroke="#1A1A1A" strokeWidth="2" fill="none" />
+
+            {/* Woman standing beside */}
+            <path d="M85 130 V75 C85 65 100 55 110 55 C120 55 135 65 135 75 V130" fill="#F28B94" stroke="#1A1A1A" strokeWidth="2.5" />
+            <circle cx="110" cy="40" r="15" fill="#FCD5CE" stroke="#1A1A1A" strokeWidth="2.5" />
+            <path d="M96 35 C96 18 124 20 124 35" fill="#1A1A1A" stroke="#1A1A1A" strokeWidth="2" />
+            <circle cx="106" cy="39" r="2" fill="#1A1A1A" />
+            <path d="M104 45 Q110 49 114 45" stroke="#1A1A1A" strokeWidth="2" fill="none" />
+
+            {/* Small Heart Above */}
+            <path d="M85 20 C80 10 70 15 75 22 Q85 30 85 30 Q85 30 95 22 C100 15 90 10 85 20 Z" fill="#F28B94" stroke="#1A1A1A" strokeWidth="1.5" />
+          </svg>
+        </div>
+      </div>
+    </div>
   );
 }
