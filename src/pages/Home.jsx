@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Navbar } from '../components/Navbar';
 import { Hero } from '../components/Hero';
 import { FeatureRow } from '../components/FeatureRow';
@@ -7,12 +7,17 @@ import { HowItWorks } from '../components/HowItWorks';
 import { ClosingCTA } from '../components/ClosingCTA';
 import { DeveloperContact } from '../components/DeveloperContact';
 import { Footer } from '../components/Footer';
+import { ArticleReaderModal } from '../components/ArticleReaderModal';
+import { ARTICLES } from '../data/articles';
 import { Link } from 'react-router-dom';
 import { StickerCard } from '../components/StickerCard';
 import { Scale, Gauge, AlertTriangle, ArrowRight, BookOpen } from 'lucide-react';
 import { HandDrawnUnderline } from '../components/illustrations/DecorativeShapes';
 
 export function Home() {
+  const [selectedArticle, setSelectedArticle] = useState(null);
+  const featuredArticles = ARTICLES.slice(0, 3);
+
   return (
     <div className="min-h-screen flex flex-col bg-[#FFFBF8]">
       {/* 1. Navbar */}
@@ -97,9 +102,49 @@ export function Home() {
                 </h2>
                 <p className="text-xs text-body font-medium pt-1">Articles demystifying compatibility signals and ML metrics.</p>
               </div>
-              <Link to="/blog" className="btn-secondary py-2.5 px-5 text-xs font-bold self-start sm:self-auto">
-                <BookOpen className="w-4 h-4 mr-1.5" /> View All Articles
+              <Link to="/blog" className="btn-secondary py-2.5 px-5 text-xs font-bold self-start sm:self-auto flex items-center gap-1.5">
+                <BookOpen className="w-4 h-4" /> View All 18 Articles
               </Link>
+            </div>
+
+            {/* 3 Featured Article Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {featuredArticles.map((article) => (
+                <StickerCard
+                  key={article.id}
+                  className="flex flex-col justify-between space-y-4 hover:-translate-y-1 transition-transform cursor-pointer"
+                  onClick={() => setSelectedArticle(article)}
+                >
+                  <div className="space-y-3">
+                    <div className={`h-36 ${article.categoryBg} border border-black rounded-xl flex items-center justify-center relative overflow-hidden shadow-sticker-sm`}>
+                      <BookOpen className="w-12 h-12 text-ink opacity-30" />
+                      <span className="absolute top-2.5 left-2.5 bg-white px-2.5 py-0.5 rounded-full border border-black text-[9px] font-black text-ink">
+                        {article.category}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center text-[10px] font-extrabold text-body space-x-2">
+                      <span>{article.date}</span>
+                      <span>•</span>
+                      <span>{article.readTime}</span>
+                    </div>
+
+                    <h3 className="text-lg font-black text-ink leading-snug hover:text-coral transition-colors">
+                      {article.title}
+                    </h3>
+
+                    <p className="text-xs text-body font-medium leading-relaxed line-clamp-2">
+                      {article.excerpt}
+                    </p>
+                  </div>
+
+                  <div className="pt-2 border-t border-black/10">
+                    <span className="inline-flex items-center text-xs font-black text-coral gap-1">
+                      Read Article <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
+                  </div>
+                </StickerCard>
+              ))}
             </div>
           </div>
         </section>
@@ -110,6 +155,14 @@ export function Home() {
         {/* 8. Developer & Contact Section */}
         <DeveloperContact showFull={true} />
       </main>
+
+      {/* Article Reader Modal */}
+      {selectedArticle && (
+        <ArticleReaderModal
+          article={selectedArticle}
+          onClose={() => setSelectedArticle(null)}
+        />
+      )}
 
       {/* 9. Footer */}
       <Footer />
