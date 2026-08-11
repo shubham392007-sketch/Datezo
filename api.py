@@ -9,6 +9,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from src.predict import predict_match, DatezoPredictor
 from src.gemini_service import gemini_service
 
@@ -174,6 +176,25 @@ async def chat_with_datezo_ai(request: ChatRequest):
             message="Datezo AI is temporarily unavailable. Please try again.",
             model="gemini-2.5-flash"
         )
+
+# -------------------------------------------------------------------
+# SERVE REACT FRONTEND STATIC BUILD (SINGLE UNIFIED DEPLOYMENT)
+# -------------------------------------------------------------------
+dist_dir = Path(__file__).resolve().parent / "dist"
+
+if dist_dir.exists():
+    # Mount assets folder
+    assets_dir = dist_dir / "assets"
+    if assets_dir.exists():
+        app.mount("/assets", StaticFiles(directory=str(assets_dir)), name="assets")
+
+    # SPA Fallback for any client-side routes (/predict, /chat, /blog, /about, etc.)
+    @app.get("/{full_path:path}")
+    async def serve_react_app(full_path: str):
+        file_path = dist_dir / full_path
+        if file_path.exists() and file_path.is_file():
+            return FileResponse(file_path)
+        return FileResponse(dist_dir / "index.html")
 
 if __name__ == "__main__":
     import uvicorn
