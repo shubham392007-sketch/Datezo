@@ -34,7 +34,7 @@ const QUICK_PROMPTS = [
 export function Chat() {
   const { result } = usePrediction();
   const navigate = useNavigate();
-  const messagesEndRef = useRef(null);
+  const chatContainerRef = useRef(null);
 
   // Health and connection state
   const [isOnline, setIsOnline] = useState(true);
@@ -89,9 +89,14 @@ export function Chat() {
     }
   }, [predictionContext]);
 
-  // Auto scroll to bottom
+  // Internal Chat Container Auto-Scroll (ONLY scroll the inner chat container, NOT the browser window)
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (chatContainerRef.current && messages.length > 0) {
+      chatContainerRef.current.scrollTo({
+        top: chatContainerRef.current.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
   }, [messages, isLoading]);
 
   const handleSendMessage = async (textToSend = inputMessage) => {
@@ -307,8 +312,8 @@ export function Chat() {
               </div>
             </div>
 
-            {/* Chat Body (Scrollable Messages Area) */}
-            <div className="flex-1 p-4 sm:p-6 overflow-y-auto space-y-4 bg-[#FFFBF8]">
+            {/* Chat Body (Scrollable Messages Area strictly scoped inside chatContainerRef) */}
+            <div ref={chatContainerRef} className="flex-1 p-4 sm:p-6 overflow-y-auto space-y-4 bg-[#FFFBF8]">
               {/* EMPTY STATE VISUAL & QUICK PROMPTS */}
               {messages.length === 0 && (
                 <div className="h-full flex flex-col items-center justify-center text-center p-4 space-y-6">
@@ -436,8 +441,6 @@ export function Chat() {
                   </div>
                 </div>
               )}
-
-              <div ref={messagesEndRef} />
             </div>
 
             {/* Input Bar Bottom */}
