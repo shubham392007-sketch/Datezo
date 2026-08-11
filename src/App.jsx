@@ -7,6 +7,7 @@ import { Predict } from './pages/Predict';
 import { Result } from './pages/Result';
 import { Insights } from './pages/Insights';
 import { Blog } from './pages/Blog';
+import { ArticleDetail } from './pages/ArticleDetail';
 import { Chat } from './pages/Chat';
 import { About } from './pages/About';
 import { NotFound } from './pages/NotFound';
@@ -21,6 +22,7 @@ export function App() {
           <Route path="/result" element={<Result />} />
           <Route path="/insights" element={<Insights />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<ArticleDetail />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/about" element={<About />} />
           <Route path="*" element={<NotFound />} />

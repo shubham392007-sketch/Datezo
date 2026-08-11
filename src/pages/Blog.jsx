@@ -3,17 +3,16 @@ import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { StickerCard } from '../components/StickerCard';
 import { DeveloperContact } from '../components/DeveloperContact';
-import { ArticleReaderModal } from '../components/ArticleReaderModal';
 import { ARTICLES } from '../data/articles';
 import { HandDrawnUnderline } from '../components/illustrations/DecorativeShapes';
 import { ArrowRight, BookOpen, Search, Sparkles, Filter } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const CATEGORIES = ["ALL", "MODELING", "CALIBRATION", "FEATURE ENGINEERING", "DATA SCIENCE", "PSYCHOLOGY", "AI ETHICS", "SYSTEM DESIGN", "DATING INSIGHTS"];
 
 export function Blog() {
   const [selectedCategory, setSelectedCategory] = useState("ALL");
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedArticle, setSelectedArticle] = useState(null);
 
   // Filter articles by category and search query
   const filteredArticles = ARTICLES.filter(art => {
@@ -91,10 +90,9 @@ export function Blog() {
               filteredArticles.map((article) => (
                 <StickerCard
                   key={article.id}
-                  className="flex flex-col justify-between space-y-6 hover:-translate-y-1 transition-transform cursor-pointer"
-                  onClick={() => setSelectedArticle(article)}
+                  className="flex flex-col justify-between space-y-6 hover:-translate-y-1 transition-transform"
                 >
-                  <div className="space-y-4">
+                  <Link to={`/blog/${article.slug}`} className="space-y-4 block">
                     {/* Vector Category Card Top Banner */}
                     <div className={`h-40 ${article.categoryBg} border border-black rounded-xl flex items-center justify-center relative overflow-hidden shadow-sticker-sm`}>
                       <BookOpen className="w-14 h-14 text-ink opacity-30" />
@@ -116,13 +114,16 @@ export function Blog() {
                     <p className="text-xs text-body font-medium leading-relaxed">
                       {article.excerpt}
                     </p>
-                  </div>
+                  </Link>
 
                   <div className="pt-2 border-t border-black/10 flex items-center justify-between">
                     <span className="text-[11px] font-bold text-body">{article.author}</span>
-                    <span className="inline-flex items-center text-xs font-black text-coral group-hover:underline gap-1">
+                    <Link
+                      to={`/blog/${article.slug}`}
+                      className="inline-flex items-center text-xs font-black text-coral hover:underline gap-1"
+                    >
                       Read Article <ArrowRight className="w-4 h-4" />
-                    </span>
+                    </Link>
                   </div>
                 </StickerCard>
               ))
@@ -140,14 +141,6 @@ export function Blog() {
             )}
           </div>
         </div>
-
-        {/* Article Reader Modal View */}
-        {selectedArticle && (
-          <ArticleReaderModal
-            article={selectedArticle}
-            onClose={() => setSelectedArticle(null)}
-          />
-        )}
 
         {/* Reusable Developer & Contact Section */}
         <DeveloperContact />
