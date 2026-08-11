@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { PredictionProvider } from './hooks/usePrediction';
+import { ScrollToTop } from './components/ScrollToTop';
 
 import { Home } from './pages/Home';
 import { Predict } from './pages/Predict';
@@ -16,6 +17,7 @@ export function App() {
   return (
     <PredictionProvider>
       <Router>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/predict" element={<Predict />} />
