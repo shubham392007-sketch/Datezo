@@ -11,6 +11,7 @@ import { Blog } from './pages/Blog';
 import { ArticleDetail } from './pages/ArticleDetail';
 import { Chat } from './pages/Chat';
 import { About } from './pages/About';
+import { Documentation } from './pages/Documentation';
 import { NotFound } from './pages/NotFound';
 
 export function App() {
@@ -27,6 +28,10 @@ export function App() {
           <Route path="/blog/:slug" element={<ArticleDetail />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/about" element={<About />} />
+          <Route path="/documentation" element={<Documentation />} />
+          <Route path="/docs" element={<Documentation />} />
+          <Route path="/privacy" element={<Documentation defaultTab="privacy" />} />
+          <Route path="/terms" element={<Documentation defaultTab="terms" />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

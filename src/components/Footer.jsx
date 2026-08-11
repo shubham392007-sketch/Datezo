@@ -12,7 +12,7 @@ export function Footer() {
         <div className="md:col-span-4 space-y-4">
           <DatezoLogo variant="white" />
           <p className="text-xs text-gray-400 font-medium leading-relaxed max-w-xs">
-            AI-powered speed dating match prediction.
+            AI-powered speed dating match prediction platform.
           </p>
         </div>
 
@@ -32,8 +32,10 @@ export function Footer() {
           <h4 className="text-xs font-black uppercase tracking-widest text-coral">RESOURCES</h4>
           <ul className="space-y-2 text-xs font-semibold text-gray-300">
             <li><Link to="/blog" className="hover:text-white transition-colors">Blog</Link></li>
+            <li><Link to="/documentation" className="hover:text-white transition-colors">Documentation</Link></li>
+            <li><Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+            <li><Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link></li>
             <li><Link to="/about#model-info" className="hover:text-white transition-colors">Model Information</Link></li>
-            <li><a href={DEVELOPER_INFO.github} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Documentation</a></li>
           </ul>
         </div>
 
@@ -75,8 +77,12 @@ export function Footer() {
           <span>© 2026 Datezo. Built by Shubham Pokale.</span>
           <Heart className="w-3.5 h-3.5 fill-coral text-coral" />
         </div>
-        <div className="text-[11px] text-gray-500 font-medium">
-          Know Your Real Compatibility.
+        <div className="flex items-center gap-4 text-[11px] text-gray-400 font-medium">
+          <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+          <span>•</span>
+          <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+          <span>•</span>
+          <Link to="/documentation" className="hover:text-white transition-colors">Documentation</Link>
         </div>
       </div>
     </footer>
