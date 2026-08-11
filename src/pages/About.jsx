@@ -2,15 +2,16 @@ import React from 'react';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { StickerCard } from '../components/StickerCard';
+import { DeveloperContact } from '../components/DeveloperContact';
 import { HandDrawnUnderline } from '../components/illustrations/DecorativeShapes';
-import { Brain, Scale, ShieldAlert, Sparkles } from 'lucide-react';
+import { ShieldAlert } from 'lucide-react';
 
 export function About() {
   return (
     <div className="min-h-screen flex flex-col bg-[#FFFBF8]">
       <Navbar />
       <main className="flex-grow py-12 px-4 md:px-8">
-        <div className="max-w-4xl mx-auto space-y-12">
+        <div className="max-w-4xl mx-auto space-y-12 mb-16">
           {/* Header */}
           <div className="text-center space-y-3">
             <h1 className="text-4xl sm:text-5xl font-black text-ink">
@@ -40,10 +41,7 @@ export function About() {
               <div className="space-y-3">
                 <h3 className="text-2xl font-black text-ink">The Model & Calibration</h3>
                 <p className="text-sm text-ink/80 font-medium leading-relaxed">
-                  Datezo trains 7 candidate ML classifiers (Logistic Regression, Decision Tree, Random Forest, SVM, KNN, XGBoost, LightGBM) using 5-Fold GroupKFold cross-validation grouped on participant IDs.
-                </p>
-                <p className="text-sm text-ink/80 font-medium leading-relaxed">
-                  The selected classifier is calibrated via Sigmoid/Platt scaling so that an 84.7% score reflects genuine calibrated probability.
+                  Datezo trains candidate ML classifiers using 5-Fold GroupKFold cross-validation grouped on participant IDs. The selected classifier is calibrated via Sigmoid/Platt scaling so that an 84.7% score reflects genuine calibrated probability.
                 </p>
               </div>
             </StickerCard>
@@ -52,7 +50,7 @@ export function About() {
               <div className="space-y-3">
                 <h3 className="text-2xl font-black text-ink">The Datezo Compatibility Index</h3>
                 <p className="text-sm text-ink/80 font-medium leading-relaxed">
-                  Separate from model classification, the Datezo Compatibility Index is a transparent multi-attribute derived score (0-100) aggregating attraction (20%), shared interests (15%), intelligence & sincerity (15%), fun & ambition (15%), perception balance (10%), preference alignment (10%), background (10%), and lifestyle (5%).
+                  Separate from model classification, the Datezo Compatibility Index is a transparent multi-attribute derived score (0-100) aggregating attraction, shared interests, intelligence, fun, ambition, background, and lifestyle.
                 </p>
               </div>
             </StickerCard>
@@ -69,6 +67,9 @@ export function About() {
             </StickerCard>
           </div>
         </div>
+
+        {/* Reusable Developer & Contact Section */}
+        <DeveloperContact />
       </main>
       <Footer />
     </div>

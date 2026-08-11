@@ -2,6 +2,7 @@ import React from 'react';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { StickerCard } from '../components/StickerCard';
+import { DeveloperContact } from '../components/DeveloperContact';
 import { HandDrawnUnderline } from '../components/illustrations/DecorativeShapes';
 import { ArrowRight, BookOpen } from 'lucide-react';
 
@@ -40,7 +41,7 @@ export function Blog() {
     <div className="min-h-screen flex flex-col bg-[#FFFBF8]">
       <Navbar />
       <main className="flex-grow py-12 px-4 md:px-8">
-        <div className="max-w-6xl mx-auto space-y-12">
+        <div className="max-w-6xl mx-auto space-y-12 mb-16">
           {/* Header */}
           <div className="text-center space-y-3 max-w-2xl mx-auto">
             <h1 className="text-4xl sm:text-5xl font-black text-ink">
@@ -60,7 +61,6 @@ export function Blog() {
             {ARTICLES.map((article) => (
               <StickerCard key={article.id} className="flex flex-col justify-between space-y-6">
                 <div className="space-y-4">
-                  {/* Article Vector Thumbnail */}
                   <div className={`h-40 ${article.categoryBg} border border-black rounded-xl flex items-center justify-center relative overflow-hidden shadow-sticker-sm`}>
                     <BookOpen className="w-12 h-12 text-ink opacity-40" />
                     <span className="absolute top-3 left-3 bg-white px-3 py-1 rounded-full border border-black text-[10px] font-black text-ink">
@@ -92,6 +92,9 @@ export function Blog() {
             ))}
           </div>
         </div>
+
+        {/* Reusable Developer & Contact Section */}
+        <DeveloperContact />
       </main>
       <Footer />
     </div>

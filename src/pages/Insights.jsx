@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { StickerCard } from '../components/StickerCard';
+import { DeveloperContact } from '../components/DeveloperContact';
 import { Scale, Gauge, AlertTriangle, ArrowRight } from 'lucide-react';
 import { HandDrawnUnderline } from '../components/illustrations/DecorativeShapes';
 
@@ -11,7 +12,7 @@ export function Insights() {
     <div className="min-h-screen flex flex-col bg-[#FFFBF8]">
       <Navbar />
       <main className="flex-grow py-12 px-4 md:px-8">
-        <div className="max-w-6xl mx-auto space-y-12">
+        <div className="max-w-6xl mx-auto space-y-12 mb-16">
           {/* Header */}
           <div className="text-center space-y-3 max-w-2xl mx-auto">
             <h1 className="text-4xl sm:text-5xl font-black text-ink">
@@ -28,7 +29,6 @@ export function Insights() {
 
           {/* 3 Sticker Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Card 1 */}
             <StickerCard bgColor="bg-pastel-blue" className="flex flex-col justify-between space-y-6">
               <div className="space-y-4">
                 <div className="w-12 h-12 rounded-2xl bg-white border border-black flex items-center justify-center shadow-sticker-sm text-ink">
@@ -44,7 +44,6 @@ export function Insights() {
               </Link>
             </StickerCard>
 
-            {/* Card 2 */}
             <StickerCard bgColor="bg-pastel-yellow" className="flex flex-col justify-between space-y-6">
               <div className="space-y-4">
                 <div className="w-12 h-12 rounded-2xl bg-white border border-black flex items-center justify-center shadow-sticker-sm text-ink">
@@ -60,7 +59,6 @@ export function Insights() {
               </Link>
             </StickerCard>
 
-            {/* Card 3 */}
             <StickerCard bgColor="bg-pastel-green" className="flex flex-col justify-between space-y-6">
               <div className="space-y-4">
                 <div className="w-12 h-12 rounded-2xl bg-white border border-black flex items-center justify-center shadow-sticker-sm text-ink">
@@ -77,6 +75,9 @@ export function Insights() {
             </StickerCard>
           </div>
         </div>
+
+        {/* Reusable Developer & Contact Section */}
+        <DeveloperContact />
       </main>
       <Footer />
     </div>
