@@ -2,22 +2,26 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { HeroIllustration } from './illustrations/HeroIllustration';
 import { HandDrawnUnderline, CoralStarburst, HeartSticker } from './illustrations/DecorativeShapes';
+import { CuteSparkleHeart, DatingCoffeeSticker, SparkleCluster } from './illustrations/CuteMascotGraphics';
 import { ArrowRight, HelpCircle, CheckCircle2, Sparkles } from 'lucide-react';
 
 export function Hero() {
   return (
     <section className="relative overflow-hidden pt-8 pb-16 px-4 md:px-8 border-b border-black bg-[#FFFBF8]">
-      {/* Background Decorative Shapes */}
-      <div className="absolute top-12 left-8 opacity-60 hidden md:block">
-        <CoralStarburst className="w-8 h-8 text-coral animate-spin-slow" />
+      {/* Background Non-Overlapping Cute Graphics */}
+      <div className="absolute top-6 left-6 opacity-80 hidden md:block pointer-events-none z-0">
+        <CuteSparkleHeart className="w-14 h-14 animate-bounce-slow" />
       </div>
-      <div className="absolute top-24 right-12 opacity-60 hidden md:block">
-        <HeartSticker className="w-10 h-10" />
+      <div className="absolute top-20 right-10 opacity-75 hidden lg:block pointer-events-none z-0">
+        <SparkleCluster className="w-12 h-12" />
+      </div>
+      <div className="absolute bottom-6 left-12 opacity-80 hidden lg:block pointer-events-none z-0">
+        <DatingCoffeeSticker className="w-12 h-12 rotate-12" />
       </div>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
         {/* Left Headline & Content (7 Cols) */}
-        <div className="lg:col-span-7 space-y-6 text-center lg:text-left z-10">
+        <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
           {/* Top Pill Badge */}
           <div className="inline-flex items-center gap-2 bg-pastel-pink border border-black px-4 py-1.5 rounded-full text-xs font-bold tracking-wider text-ink shadow-sticker-sm">
             <Sparkles className="w-3.5 h-3.5 text-coral fill-current" />

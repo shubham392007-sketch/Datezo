@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { usePrediction } from '../hooks/usePrediction';
 import { RatingSlider } from './RatingSlider';
+import { LoveLetterSticker, DatingCoffeeSticker, SparkleCluster } from './illustrations/CuteMascotGraphics';
 import { Info, Sparkles, Heart, Smile, Brain, Flame, Award, Users, User, ArrowRight, X } from 'lucide-react';
 
 export function PairForm({ onSubmitSuccess }) {
@@ -29,11 +30,22 @@ export function PairForm({ onSubmitSuccess }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-10 max-w-4xl mx-auto">
+    <form onSubmit={handleSubmit} className="space-y-10 max-w-4xl mx-auto relative">
+      {/* Background Decorative Cute Graphics (Non-Overlapping Side Margins) */}
+      <div className="absolute -left-16 top-12 opacity-80 hidden lg:block pointer-events-none z-0">
+        <LoveLetterSticker className="w-14 h-14 -rotate-12" />
+      </div>
+      <div className="absolute -right-16 top-64 opacity-80 hidden lg:block pointer-events-none z-0">
+        <DatingCoffeeSticker className="w-14 h-14 rotate-12" />
+      </div>
+      <div className="absolute -left-16 bottom-32 opacity-75 hidden lg:block pointer-events-none z-0">
+        <SparkleCluster className="w-12 h-12" />
+      </div>
+
       {/* ------------------------------------------------------------- */}
       {/* SECTION 1: BASIC INFORMATION (Pastel Blue) */}
       {/* ------------------------------------------------------------- */}
-      <div className="bg-pastel-blue p-6 sm:p-8 rounded-3xl border border-black shadow-sticker-lg space-y-6">
+      <div className="bg-pastel-blue p-6 sm:p-8 rounded-3xl border border-black shadow-sticker-lg space-y-6 relative z-10">
         <div className="flex items-center justify-between border-b border-black/20 pb-3">
           <h3 className="text-xl font-black text-ink flex items-center gap-2">
             <span className="w-8 h-8 rounded-xl bg-white border border-black flex items-center justify-center text-xs font-black shadow-sticker-sm">01</span>
@@ -141,7 +153,7 @@ export function PairForm({ onSubmitSuccess }) {
       {/* ------------------------------------------------------------- */}
       {/* SECTION 2: COMPATIBILITY SIGNALS (Pastel Yellow) */}
       {/* ------------------------------------------------------------- */}
-      <div className="bg-pastel-yellow p-6 sm:p-8 rounded-3xl border border-black shadow-sticker-lg space-y-6">
+      <div className="bg-pastel-yellow p-6 sm:p-8 rounded-3xl border border-black shadow-sticker-lg space-y-6 relative z-10">
         <div className="flex items-center justify-between border-b border-black/20 pb-3">
           <h3 className="text-xl font-black text-ink flex items-center gap-2">
             <span className="w-8 h-8 rounded-xl bg-white border border-black flex items-center justify-center text-xs font-black shadow-sticker-sm">02</span>
@@ -206,7 +218,7 @@ export function PairForm({ onSubmitSuccess }) {
       {/* ------------------------------------------------------------- */}
       {/* SECTION 3: WHAT THEY SEE IN EACH OTHER (Pastel Green) */}
       {/* ------------------------------------------------------------- */}
-      <div className="bg-pastel-green p-6 sm:p-8 rounded-3xl border border-black shadow-sticker-lg space-y-6">
+      <div className="bg-pastel-green p-6 sm:p-8 rounded-3xl border border-black shadow-sticker-lg space-y-6 relative z-10">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-black/20 pb-3 gap-2">
           <div>
             <h3 className="text-xl font-black text-ink flex items-center gap-2">
@@ -301,7 +313,7 @@ export function PairForm({ onSubmitSuccess }) {
       {/* ------------------------------------------------------------- */}
       {/* SECTION 4: PREFERENCES & SELF-RATINGS (Pastel Lavender) */}
       {/* ------------------------------------------------------------- */}
-      <div className="bg-pastel-lavender p-6 sm:p-8 rounded-3xl border border-black shadow-sticker-lg space-y-6">
+      <div className="bg-pastel-lavender p-6 sm:p-8 rounded-3xl border border-black shadow-sticker-lg space-y-6 relative z-10">
         <div className="flex items-center justify-between border-b border-black/20 pb-3">
           <h3 className="text-xl font-black text-ink flex items-center gap-2">
             <span className="w-8 h-8 rounded-xl bg-white border border-black flex items-center justify-center text-xs font-black shadow-sticker-sm">04</span>
@@ -329,7 +341,7 @@ export function PairForm({ onSubmitSuccess }) {
 
       {/* Error Banner if any */}
       {error && (
-        <div className="p-4 bg-pastel-pink border-2 border-black rounded-2xl shadow-sticker text-ink text-sm font-bold flex items-center justify-between">
+        <div className="p-4 bg-pastel-pink border-2 border-black rounded-2xl shadow-sticker text-ink text-sm font-bold flex items-center justify-between relative z-10">
           <span>{error}</span>
           <button type="button" onClick={() => updateFormField('error', null)} className="p-1">
             <X className="w-4 h-4" />
@@ -338,7 +350,7 @@ export function PairForm({ onSubmitSuccess }) {
       )}
 
       {/* Submit Button & Disclosure */}
-      <div className="space-y-4 pt-4 text-center">
+      <div className="space-y-4 pt-4 text-center relative z-10">
         <button
           type="submit"
           disabled={isLoading}

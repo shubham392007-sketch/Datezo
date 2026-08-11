@@ -1,12 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { HandDrawnUnderline, HeartSticker, CoralStarburst } from './illustrations/DecorativeShapes';
+import { SmileyMatchSticker, CuteSparkleHeart } from './illustrations/CuteMascotGraphics';
 import { ArrowRight, Sparkles } from 'lucide-react';
 
 export function ClosingCTA() {
   return (
     <section className="py-16 px-4 md:px-8 bg-pastel-pink/40 border-b border-black relative overflow-hidden">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      {/* Background Cute Decorative Graphics */}
+      <div className="absolute top-4 left-6 opacity-75 hidden md:block pointer-events-none z-0">
+        <CuteSparkleHeart className="w-12 h-12 rotate-12" />
+      </div>
+      <div className="absolute bottom-4 right-12 opacity-80 hidden lg:block pointer-events-none z-0">
+        <SmileyMatchSticker className="w-16 h-16" />
+      </div>
+
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
         {/* Left White Sticker Card (7 Cols) */}
         <div className="lg:col-span-7 bg-white border-2 border-black rounded-3xl p-8 sm:p-12 shadow-sticker-lg space-y-6 relative">
           <div className="inline-flex items-center gap-2 bg-pastel-yellow px-3 py-1 rounded-full border border-black text-xs font-bold text-ink">
