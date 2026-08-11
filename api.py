@@ -1,7 +1,7 @@
 import os
 import sys
 from pathlib import Path
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, Literal
 from pydantic import BaseModel, Field
 
 # Ensure project root is in sys.path
@@ -10,10 +10,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from src.predict import predict_match, DatezoPredictor
+from src.gemini_service import gemini_service
 
 app = FastAPI(
-    title="Datezo Match Prediction API",
-    description="AI-Powered Speed Dating Match Prediction & Compatibility Insights Engine",
+    title="Datezo Match Prediction & AI Chat API",
+    description="AI-Powered Speed Dating Match Prediction & Gemini Conversational Assistant",
     version="1.0.0"
 )
 
@@ -26,6 +27,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# -------------------------------------------------------------------
+# ML PREDICTION SCHEMAS
+# -------------------------------------------------------------------
 class PairPredictionRequest(BaseModel):
     male_age: int = Field(..., ge=18, le=100, description="Male age")
     female_age: int = Field(..., ge=18, le=100, description="Female age")
@@ -67,9 +71,44 @@ class PredictionResponse(BaseModel):
     model_version: str = "1.0.0"
     threshold_used: float = 0.30
 
+# -------------------------------------------------------------------
+# GEMINI CHAT SCHEMAS
+# -------------------------------------------------------------------
+class ChatMessage(BaseModel):
+    role: Literal["user", "assistant"]
+    content: str
+
+class PredictionContext(BaseModel):
+    prediction: Optional[int] = 1
+    label: Optional[str] = "MATCH"
+    match_probability: Optional[float] = 84.7
+    compatibility_category: Optional[str] = "Very High Compatibility"
+    compatibility_index: Optional[float] = 87.4
+    positive_factors: Optional[List[str]] = []
+    negative_factors: Optional[List[str]] = []
+    model_version: Optional[str] = "1.0.0"
+    threshold_used: Optional[float] = 0.30
+
+class ChatRequest(BaseModel):
+    message: str
+    conversation: Optional[List[ChatMessage]] = []
+    prediction_context: Optional[Dict[str, Any]] = None
+
+class ChatResponse(BaseModel):
+    success: bool
+    message: str
+    model: Optional[str] = None
+
+# -------------------------------------------------------------------
+# ENDPOINTS
+# -------------------------------------------------------------------
 @app.get("/api/v1/health")
 def health_check():
-    return {"status": "healthy", "service": "Datezo API", "version": "1.0.0"}
+    return {
+        "status": "healthy",
+        "ml_service": "healthy",
+        "gemini_service": "configured" if gemini_service.is_configured() else "not_configured"
+    }
 
 @app.get("/api/v1/model-info")
 def get_model_info():
@@ -114,6 +153,27 @@ def predict(request: PairPredictionRequest):
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/v1/chat", response_model=ChatResponse)
+async def chat_with_datezo_ai(request: ChatRequest):
+    try:
+        conversation_dicts = [msg.dict() for msg in request.conversation] if request.conversation else []
+        result = await gemini_service.generate_chat_response(
+            message=request.message,
+            conversation=conversation_dicts,
+            prediction_context=request.prediction_context
+        )
+        return ChatResponse(
+            success=result.get("success", False),
+            message=result.get("message", "Datezo AI is temporarily unavailable."),
+            model=result.get("model", "gemini-2.5-flash")
+        )
+    except Exception as e:
+        return ChatResponse(
+            success=False,
+            message="Datezo AI is temporarily unavailable. Please try again.",
+            model="gemini-2.5-flash"
+        )
 
 if __name__ == "__main__":
     import uvicorn

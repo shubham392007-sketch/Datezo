@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Sparkles, Check, X, Info, ChevronDown, ChevronUp, Share2, RefreshCw, BookOpen } from 'lucide-react';
+import { Sparkles, Check, X, Info, ChevronDown, ChevronUp, Share2, RefreshCw, BookOpen, Bot } from 'lucide-react';
 
 export function ResultCard({ result, onTryAnother }) {
   const [showShap, setShowShap] = useState(false);
@@ -256,13 +256,21 @@ export function ResultCard({ result, onTryAnother }) {
       </div>
 
       {/* ------------------------------------------------------------- */}
-      {/* ACTION BUTTONS */}
+      {/* ACTION BUTTONS (INCLUDING "ASK DATEZO AI →") */}
       {/* ------------------------------------------------------------- */}
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
         <Link
+          to="/chat"
+          className="btn-primary py-3.5 px-8 w-full sm:w-auto text-center font-black flex items-center justify-center gap-2"
+        >
+          <Bot className="w-5 h-5 text-white" />
+          Ask Datezo AI →
+        </Link>
+
+        <Link
           to="/predict"
           onClick={onTryAnother}
-          className="btn-primary py-3.5 px-8 w-full sm:w-auto text-center"
+          className="btn-secondary py-3.5 px-8 w-full sm:w-auto text-center"
         >
           <RefreshCw className="w-4 h-4 mr-2" />
           Try Another Pair
@@ -273,7 +281,7 @@ export function ResultCard({ result, onTryAnother }) {
           className="btn-secondary py-3.5 px-8 w-full sm:w-auto text-center"
         >
           <BookOpen className="w-4 h-4 mr-2 text-ink" />
-          Understand Your Score
+          Understand Score
         </Link>
 
         <button

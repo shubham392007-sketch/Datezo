@@ -4,7 +4,7 @@ import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { StickerCard } from '../components/StickerCard';
 import { DeveloperContact } from '../components/DeveloperContact';
-import { Scale, Gauge, AlertTriangle, ArrowRight } from 'lucide-react';
+import { Scale, Gauge, AlertTriangle, ArrowRight, Bot, Sparkles } from 'lucide-react';
 import { HandDrawnUnderline } from '../components/illustrations/DecorativeShapes';
 
 export function Insights() {
@@ -73,6 +73,23 @@ export function Insights() {
                 Read More <ArrowRight className="w-4 h-4" />
               </Link>
             </StickerCard>
+          </div>
+
+          {/* Bottom Chat CTA Banner */}
+          <div className="bg-pastel-pink/50 border-2 border-black rounded-3xl p-8 text-center shadow-sticker-lg max-w-2xl mx-auto space-y-4">
+            <div className="w-12 h-12 rounded-2xl bg-white border border-black flex items-center justify-center mx-auto text-coral shadow-sticker-sm">
+              <Bot className="w-6 h-6" />
+            </div>
+            <h3 className="text-2xl font-black text-ink">Still Confused?</h3>
+            <p className="text-xs sm:text-sm text-body font-medium max-w-md mx-auto">
+              Ask Datezo AI to explain your compatibility report in plain language.
+            </p>
+            <div className="pt-2">
+              <Link to="/chat" className="btn-primary py-3.5 px-8 inline-flex items-center gap-2 text-sm font-black">
+                <Sparkles className="w-4 h-4 fill-current text-white" />
+                Ask Datezo AI →
+              </Link>
+            </div>
           </div>
         </div>
 

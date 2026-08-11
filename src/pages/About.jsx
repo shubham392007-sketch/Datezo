@@ -4,7 +4,7 @@ import { Footer } from '../components/Footer';
 import { StickerCard } from '../components/StickerCard';
 import { DeveloperContact } from '../components/DeveloperContact';
 import { HandDrawnUnderline } from '../components/illustrations/DecorativeShapes';
-import { ShieldAlert } from 'lucide-react';
+import { ShieldAlert, Cpu, Sparkles } from 'lucide-react';
 
 export function About() {
   return (
@@ -51,6 +51,21 @@ export function About() {
                 <h3 className="text-2xl font-black text-ink">The Datezo Compatibility Index</h3>
                 <p className="text-sm text-ink/80 font-medium leading-relaxed">
                   Separate from model classification, the Datezo Compatibility Index is a transparent multi-attribute derived score (0-100) aggregating attraction, shared interests, intelligence, fun, ambition, background, and lifestyle.
+                </p>
+              </div>
+            </StickerCard>
+
+            {/* Section 37 Requirement: Powered by Gemini */}
+            <StickerCard bgColor="bg-pastel-lavender" id="gemini-ai">
+              <div className="space-y-3">
+                <h3 className="text-2xl font-black text-ink flex items-center gap-2">
+                  <Sparkles className="w-6 h-6 text-coral fill-current" /> Powered by Google Gemini API
+                </h3>
+                <p className="text-sm text-ink/80 font-medium leading-relaxed">
+                  Datezo AI uses Google's official Gemini API (`google-genai` SDK) for conversational explanations around the machine-learning prediction.
+                </p>
+                <p className="text-xs text-body font-semibold italic">
+                  Note: The Datezo ML classifier remains the actual match prediction model. Gemini operates strictly as the conversational explanation layer to help users understand their compatibility report.
                 </p>
               </div>
             </StickerCard>
