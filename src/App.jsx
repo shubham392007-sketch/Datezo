@@ -9,8 +9,6 @@ import { Insights } from './pages/Insights';
 import { Blog } from './pages/Blog';
 import { Chat } from './pages/Chat';
 import { About } from './pages/About';
-import { Login } from './pages/Login';
-import { Signup } from './pages/Signup';
 import { NotFound } from './pages/NotFound';
 
 export function App() {
@@ -25,8 +23,6 @@ export function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/about" element={<About />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

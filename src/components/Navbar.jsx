@@ -53,13 +53,6 @@ export function Navbar() {
         {/* Desktop Right Actions */}
         <div className="hidden md:flex items-center space-x-4">
           <Link
-            to="/login"
-            className="text-sm font-bold text-ink hover:text-coral transition-colors px-3 py-1.5"
-          >
-            Log In
-          </Link>
-
-          <Link
             to="/predict"
             className="btn-primary text-sm py-2 px-5"
           >
@@ -126,23 +119,6 @@ export function Navbar() {
               <UserCheck className="w-5 h-5 text-ink" />
               About Datezo
             </Link>
-
-            <div className="pt-4 border-t border-black flex justify-between items-center">
-              <Link
-                to="/login"
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-sm font-bold text-ink hover:text-coral"
-              >
-                Log In
-              </Link>
-              <Link
-                to="/signup"
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-sm font-bold text-coral underline"
-              >
-                Create Account
-              </Link>
-            </div>
           </nav>
         </div>
       )}
