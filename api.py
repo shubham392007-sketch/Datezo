@@ -178,16 +178,6 @@ async def chat_with_datezo_ai(request: ChatRequest):
         )
 
 # -------------------------------------------------------------------
-# CATCH-ALL UNKNOWN API ROUTE HANDLER (Prevents 405 crashes)
-# -------------------------------------------------------------------
-@app.api_route("/api/{path:path}", methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "PATCH"])
-async def unknown_api_route(path: str):
-    return JSONResponse(
-        status_code=404,
-        content={"detail": f"Endpoint '/api/{path}' not found on Datezo API."}
-    )
-
-# -------------------------------------------------------------------
 # SERVE REACT FRONTEND STATIC BUILD (SINGLE UNIFIED DEPLOYMENT)
 # -------------------------------------------------------------------
 dist_dir = Path(__file__).resolve().parent / "dist"
@@ -198,9 +188,11 @@ if dist_dir.exists():
     if assets_dir.exists():
         app.mount("/assets", StaticFiles(directory=str(assets_dir)), name="assets")
 
-    # SPA Fallback for any client-side routes (/predict, /chat, /blog, /about, etc.)
+    # SPA Fallback for client-side routes (/predict, /chat, /blog, /about, etc.)
     @app.get("/{full_path:path}")
     async def serve_react_app(full_path: str):
+        if full_path.startswith("api/"):
+            raise HTTPException(status_code=404, detail=f"API endpoint '/{full_path}' not found.")
         file_path = dist_dir / full_path
         if file_path.exists() and file_path.is_file():
             return FileResponse(file_path)
