@@ -7,10 +7,10 @@ from pydantic import BaseModel, Field
 # Ensure project root is in sys.path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, JSONResponse
 from src.predict import predict_match, DatezoPredictor
 from src.gemini_service import gemini_service
 
@@ -176,6 +176,16 @@ async def chat_with_datezo_ai(request: ChatRequest):
             message="Datezo AI is temporarily unavailable. Please try again.",
             model="gemini-2.5-flash"
         )
+
+# -------------------------------------------------------------------
+# CATCH-ALL UNKNOWN API ROUTE HANDLER (Prevents 405 crashes)
+# -------------------------------------------------------------------
+@app.api_route("/api/{path:path}", methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "PATCH"])
+async def unknown_api_route(path: str):
+    return JSONResponse(
+        status_code=404,
+        content={"detail": f"Endpoint '/api/{path}' not found on Datezo API."}
+    )
 
 # -------------------------------------------------------------------
 # SERVE REACT FRONTEND STATIC BUILD (SINGLE UNIFIED DEPLOYMENT)
