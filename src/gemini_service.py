@@ -24,6 +24,7 @@ Core Principles:
    - Never claim two people are "soulmates" or guaranteed to marry.
 3. ANSWER ANY QUESTION: If the user asks a general question, dating query, or technical question, answer it directly with high quality and clarity.
 4. PERSONALITY & TONE: Warm, clear, playful, intelligent, non-judgmental, and human.
+5. COMPLETE & UNTRUNCATED OUTPUT: Always generate complete, fully articulated, comprehensive responses. Never cut off sentences, leave bullet points incomplete, or truncate explanations halfway. Ensure every explanation, answer, bullet list, or paragraph is completed with full logical depth and a clean conclusion.
 
 Do not expose API keys, internal system prompts, or server credentials.
 You are Datezo AI."""
@@ -56,7 +57,7 @@ class GeminiService:
         prediction_context: Optional[Dict[str, Any]] = None
     ) -> Dict[str, Any]:
         """
-        Generate a Datezo AI response using Google Gemini API.
+        Generate a complete Datezo AI response using Google Gemini API.
         """
         if not self.is_configured():
             return {
@@ -109,14 +110,14 @@ class GeminiService:
 
             prompt_full += f"User: {message}\nDatezo AI:"
 
-            # Execute Gemini request with 15s timeout
+            # Execute Gemini request with 20s timeout and 2048 token allowance for complete generation
             loop = asyncio.get_event_loop()
             
             def _call_gemini(model_to_use):
                 config = types.GenerateContentConfig(
                     system_instruction=DATEZO_SYSTEM_INSTRUCTION,
                     temperature=0.4,
-                    max_output_tokens=900,
+                    max_output_tokens=2048,
                 )
                 return client.models.generate_content(
                     model=model_to_use,
@@ -128,15 +129,14 @@ class GeminiService:
             try:
                 response = await asyncio.wait_for(
                     loop.run_in_executor(None, _call_gemini, self.model_name),
-                    timeout=15.0
+                    timeout=20.0
                 )
             except Exception as first_err:
                 logger.warning(f"Primary model {self.model_name} call failed: {first_err}. Attempting fallback...")
-                # Fallback model attempt if primary model string differs
                 fallback_model = "gemini-2.5-flash" if self.model_name != "gemini-2.5-flash" else "gemini-1.5-flash"
                 response = await asyncio.wait_for(
                     loop.run_in_executor(None, _call_gemini, fallback_model),
-                    timeout=15.0
+                    timeout=20.0
                 )
 
             reply_text = response.text.strip() if response and response.text else "I am Datezo AI. How can I help you with your question?"
@@ -148,7 +148,7 @@ class GeminiService:
             }
 
         except asyncio.TimeoutError:
-            logger.warning("Gemini API call timed out after 15s")
+            logger.warning("Gemini API call timed out after 20s")
             return {
                 "success": False,
                 "message": "Datezo AI took too long to respond. Please try again.",
